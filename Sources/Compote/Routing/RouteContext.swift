@@ -54,12 +54,12 @@ extension RouteContext {
         headers: HTTPHeaders = [:],
         body: ResponseBody? = nil
     ) -> EventLoopFuture<HTTPResponse> {
-        response(status, headers, body: body?.build(allocator))
+        response(status: status, headers: headers, body: body?.build(allocator))
     }
 
     public func response(
-        _ status: HTTPResponseStatus = .ok,
-        _ headers: HTTPHeaders = [:],
+        status: HTTPResponseStatus = .ok,
+        headers: HTTPHeaders = [:],
         body: IOData?
     ) -> EventLoopFuture<HTTPResponse> {
 
