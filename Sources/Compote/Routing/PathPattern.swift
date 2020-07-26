@@ -50,11 +50,7 @@ extension PathPattern {
 
 extension PathPattern: CustomStringConvertible {
     public var description: String {
-        if components.isEmpty {
-            return "/"
-        } else {
-            return components.joined(separator: "/")
-        }
+        "/".appending(components.joined(separator: "/"))
     }
 }
 
