@@ -25,7 +25,7 @@ struct UserRoutes: Route {
                 $0.response(status: .created, body: .string("new user"))
             }
             DELETE {
-                $0.response(status: .noContent, body: .string("none"))
+                $0.response(status: .noContent)
             }
         }
     }
