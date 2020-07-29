@@ -3,19 +3,6 @@ import NIO
 import NIOHTTP1
 import Logging
 
-extension Logger.Level: ExpressibleByArgument {}
-
-public struct LaunchOptions: ParsableArguments {
-    @Argument(help: "A hostname which should be resolved.")
-    public var host: String = "::1"
-
-    @Argument(help: "A port the server will run on.")
-    public var port: Int = 8888
-
-    /// Default launch options.
-    public init() {}
-}
-
 /// Web application.
 public protocol App: Route, ParsableCommand {
     /* @OptionGroup */
@@ -29,7 +16,9 @@ extension App {
         let router = RouteBuilder.buildBlock(route)
         print(router)
 
-        let logger = Logger(label: "Compote")
+        var logger = Logger(label: "Compote")
+        logger.logLevel = options.logLevel
+
         let group = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
         defer {
             try! group.syncShutdownGracefully()
